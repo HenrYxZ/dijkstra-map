@@ -5,9 +5,9 @@ def add_neighbors(closed, j, i):
     """
     Add neighbor pixels that are not in the closed map.
     Args:
-        closed(ndarray): 2D binary array where true means being closed
-        j(int): index of row for the pixel
-        i(int): index of column for the pixel
+        closed (ndarray): 2D binary array where true means being closed
+        j (int): index of row for the pixel
+        i (int): index of column for the pixel
 
     Returns:
         list: list of tuples with indices for the neighbor pixels not in closed
@@ -28,9 +28,10 @@ def flood(input_map, walls_map=None, limit=0):
     """
     Create a Dijkstra map flood filling a given 2D map
     Args:
-        input_map(ndarray): input 2D array
-        walls_map(ndarray): a binary 2D array where true means a wall
-        limit(int): after this limit it will stop flooding, is like max distance
+        input_map (ndarray): input 2D array
+        walls_map (ndarray): a binary 2D array where true means a wall
+        limit (int): after this limit it will stop flooding, is like max
+            distance
 
     Returns:
         ndarray: 2D array with distances
