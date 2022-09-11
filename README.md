@@ -99,6 +99,19 @@ To install it run:
 
 `python -m pip install -r requirements.txt`
 
+
+## Examples
+
+### Path-finding
+
+In this example game we have a 2D grid with the player represented as a blue 
+circle and 3 enemies as other circles that chase the player. Path finding 
+for the enemies is implemented using a dijkstra map that is recalculated on 
+each update call.
+
+![path finding](docs/files/pathfinding.gif)
+
+
 ## Testing
 
 To run the tests use unittest in this way:
