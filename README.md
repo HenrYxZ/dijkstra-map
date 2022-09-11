@@ -1,6 +1,6 @@
-# flood
+# dijkstra-map
 
-Flood fill a 2D map to create a Dijkstra map (distance map)
+Python implementation to create a Dijkstra map (distance map)
 
 ## Usage
 
@@ -17,7 +17,7 @@ Example:
 
 ```python
 import numpy as np
-from flood import flood
+from dijkstra_map import dijkstra_map
 
 input_map = np.array(
     [
@@ -39,7 +39,7 @@ walls_map = np.array(
     dtype=int
 )
 
-output_map = flood(input_map, walls_map)
+output_map = dijkstra_map(input_map, walls_map)
 print(output_map)
 ```
 
@@ -57,7 +57,7 @@ they will take that value, for example:
 
 ```python
 import numpy as np
-from flood import flood
+from dijkstra_map import dijkstra_map
 
 input_map = np.array(
     [
@@ -79,7 +79,7 @@ walls_map = np.array(
     dtype=int
 )
 
-output_map = flood(input_map, walls_map, limit=2)
+output_map = dijkstra_map(input_map, walls_map, limit=2)
 print(output_map)
 ```
 

@@ -1,1 +1,1 @@
-from tests.test_flood import FloodTestCase
+from tests.test_dijkstra_map import FloodTestCase

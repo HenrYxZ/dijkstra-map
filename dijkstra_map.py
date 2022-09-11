@@ -24,7 +24,7 @@ def add_neighbors(closed, j, i):
     return neighbors
 
 
-def flood(input_map, walls_map=None, limit=0):
+def dijkstra_map(input_map, walls_map=None, limit=0):
     """
     Create a Dijkstra map flood filling a given 2D map
     Args:

@@ -2,7 +2,7 @@ import numpy as np
 import unittest
 
 # Local modules
-from flood import flood
+from dijkstra_map import dijkstra_map
 
 
 class FloodTestCase(unittest.TestCase):
@@ -37,8 +37,8 @@ class FloodTestCase(unittest.TestCase):
             ],
             dtype=int
         )
-        flooded = flood(self.input_map, self.walls_map)
-        np.testing.assert_array_equal(flooded, output_map)
+        d_map = dijkstra_map(self.input_map, self.walls_map)
+        np.testing.assert_array_equal(d_map, output_map)
 
     def test_flooding_limit(self):
         output_map = np.array(
@@ -50,8 +50,8 @@ class FloodTestCase(unittest.TestCase):
             ],
             dtype=int
         )
-        flooded = flood(self.input_map, self.walls_map, limit=2)
-        np.testing.assert_array_equal(flooded, output_map)
+        d_map = dijkstra_map(self.input_map, self.walls_map, limit=2)
+        np.testing.assert_array_equal(d_map, output_map)
 
     def test_flooding_without_walls(self):
         output_map = np.array(
@@ -63,8 +63,8 @@ class FloodTestCase(unittest.TestCase):
             ],
             dtype=int
         )
-        flooded = flood(self.input_map)
-        np.testing.assert_array_equal(flooded, output_map)
+        d_map = dijkstra_map(self.input_map)
+        np.testing.assert_array_equal(d_map, output_map)
 
 
 if __name__ == '__main__':

@@ -24,7 +24,7 @@ import pyglet
 from pyglet.window import key
 
 
-from flood import flood
+from dijkstra_map import dijkstra_map
 
 
 # Windows
@@ -115,21 +115,21 @@ class Enemy(pyglet.shapes.Circle):
         self.x = value[1] * TILE_SIZE + TILE_SIZE * 0.5
         self.y = WIDTH - TILE_SIZE - value[0] * TILE_SIZE + TILE_SIZE * 0.5
 
-    def chase_player(self, dijkstra_map, obstacles):
+    def chase_player(self, d_map, obstacles):
         """
         Move to the nearby position closest to the player.
 
         Args:
-            dijkstra_map (ndarray): The current dijkstra map
+            d_map (ndarray): The current dijkstra map
             obstacles (ndarray): 2D map where 1 means obstacle
         """
         # choose the direction with lower value
         lowest_value = N
         # If current value is good enough, don't move
-        if dijkstra_map[self.grid_position] == 1:
+        if d_map[self.grid_position] == 1:
             return
         lowest_pos = self.grid_position
-        h, w = dijkstra_map.shape
+        h, w = d_map.shape
         center = np.zeros(2)
         for direction in DIRECTIONS:
             if np.array_equal(direction, center):
@@ -143,7 +143,7 @@ class Enemy(pyglet.shapes.Circle):
             if obstacles[new_j, new_i]:
                 continue
 
-            new_value = dijkstra_map[new_j, new_i]
+            new_value = d_map[new_j, new_i]
             if new_value < lowest_value:
                 lowest_value = new_value
                 lowest_pos = (new_j, new_i)
@@ -152,9 +152,9 @@ class Enemy(pyglet.shapes.Circle):
 
 
 def update(_):
-    dijkstra_map = np.ones([N, N], dtype=int)
-    dijkstra_map[player_pos[0], player_pos[1]] = 0
-    dijkstra_map = flood(dijkstra_map, walls)
+    input_map = np.ones([N, N], dtype=int)
+    input_map[player_pos[0], player_pos[1]] = 0
+    d_map = dijkstra_map(input_map, walls)
 
     obstacles = walls > 0
     obstacles[player_pos[0], player_pos[1]] = 1
@@ -163,7 +163,7 @@ def update(_):
 
     for enemy in enemies:
         obstacles[enemy.grid_position] = 0
-        enemy.chase_player(dijkstra_map, obstacles)
+        enemy.chase_player(d_map, obstacles)
         obstacles[enemy.grid_position] = 1
 
 
